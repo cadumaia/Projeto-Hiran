@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Projetos - Fitmita</title>
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <div class="sidebar-heading">
+            <i class="fas fa-cubes me-2"></i> Gerenciador
+        </div>
+        <div class="list-group list-group-flush mt-3">
+            <a onclick="showView('dashboard')" class="list-group-item list-group-item-action active" id="nav-dashboard">
+                <i class="fas fa-chart-pie me-3"></i>Dashboard
+            </a>
+            <a onclick="showView('projects')" class="list-group-item list-group-item-action" id="nav-projects">
+                <i class="fas fa-list-ul me-3"></i>Projetos
+            </a>
+            <a onclick="showView('kanban')" class="list-group-item list-group-item-action" id="nav-kanban">
+                <i class="fas fa-columns me-3"></i>Kanban
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <i class="fas fa-users me-3"></i>Equipe
+            </a>
+            <div class="mt-5 px-3">
+                <p class="text-white-50 small text-uppercase mb-2">Sistema</p>
+            </div>
+            <a href="#" class="list-group-item list-group-item-action">
+                <i class="fas fa-cog me-3"></i>Configurações
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <i class="fas fa-sign-out-alt me-3"></i>Sair
+            </a>
+        </div>
+    </div>
+
+    
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm py-3 px-4 sticky-top">
+            <button class="btn btn-link text-secondary" id="sidebarToggle">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+
+            <h5 class="ms-3 mb-0 text-gray-800 d-none d-md-block" id="page-title">Dashboard</h5>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link position-relative" href="#" id="alertsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell fa-fw text-gray-400"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                <span class="visually-hidden">Alertas</span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0 small">
+                            <li><a class="dropdown-item" href="#">Projeto X atrasado</a></li>
+                            <li><a class="dropdown-item" href="#">Nova tarefa atribuída</a></li>
+                        </ul>
+                    </li>
+                    
+                    <div class="topbar-divider d-none d-sm-block border-end mx-2" style="height: 20px;"></div>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <span class="me-2 d-none d-lg-inline text-gray-600 small fw-bold">Administrador</span>
+                            <img src="https://i.pravatar.cc/150?img=12" alt="User" class="rounded-circle" style="width: 32px; height: 32px; border: 1px solid #e3e6f0;">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end shadow border-0">
+                            <a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Perfil</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i> Ajustes</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2"></i> Sair</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid p-4" id="main-container">
+
+            <!-- Dashboard -->
+            <div id="view-dashboard" class="fade-in">
+                
+                <!-- Cards dos -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card card-dashboard h-100 py-2 border-start border-4 border-primary">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Projetos Totais</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="dash-total-projects">12</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-briefcase fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card card-dashboard h-100 py-2 border-start border-4 border-success">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Concluídos</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">4</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-check-circle fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card card-dashboard h-100 py-2 border-start border-4 border-warning">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Em Atraso</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card card-dashboard h-100 py-2 border-start border-4 border-info">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Eficiência da Equipe</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">93%</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-users-cog fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <div class="card card-dashboard shadow mb-4 h-100">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-white border-bottom-0">
+                                <h6 class="m-0 font-weight-bold text-primary">Progresso dos Projetos Ativos</h6>
+                                <div class="dropdown no-arrow">
+                                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-1 small font-weight-bold">
+                                        <span>Website E-commerce</span>
+                                        <span>80%</span>
+                                    </div>
+                                    <div class="progress mb-4" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-1 small font-weight-bold">
+                                        <span>App Mobile Interno</span>
+                                        <span>45%</span>
+                                    </div>
+                                    <div class="progress mb-4" style="height: 8px;">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-1 small font-weight-bold">
+                                        <span>Migração de Banco de Dados</span>
+                                        <span>20%</span>
+                                    </div>
+                                    <div class="progress mb-4" style="height: 8px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 20%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between mb-1 small font-weight-bold">
+                                        <span>Campanha Marketing Q4</span>
+                                        <span class="text-danger">5% (Crítico)</span>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 5%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <div class="card card-dashboard shadow mb-4 h-100">
+                            <div class="card-header py-3 bg-white border-bottom-0">
+                                <h6 class="m-0 font-weight-bold text-primary">Status Geral</h6>
+                            </div>
+                            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                                <div style="height: 250px; width: 100%;">
+                                    <canvas id="statusChart"></canvas>
+                                </div>
+                                <div class="mt-4 text-center small">
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-success"></i> Concluído
+                                    </span>
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-primary"></i> Andamento
+                                    </span>
+                                    <span class="mr-2">
+                                        <i class="fas fa-circle text-warning"></i> Planejamento
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: PROJECTS LIST -->
+            <div id="view-projects" class="d-none fade-in">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                    <div class="mb-2 mb-md-0">
+                        <h3 class="text-gray-800 mb-0">Gestão de Projetos</h3>
+                        <p class="text-muted small mb-0">Gerencie prazos, equipes e entregáveis.</p>
+                    </div>
+                    <button class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#newProjectModal">
+                        <i class="fas fa-plus me-2"></i>Novo Projeto
+                    </button>
+                </div>
+
+                <div class="card card-dashboard shadow mb-4">
+                    <div class="card-header py-3 bg-white d-flex justify-content-between align-items-center">
+                        <h6 class="m-0 font-weight-bold text-primary">Listagem Completa</h6>
+                        <div class="input-group input-group-sm" style="width: 250px;">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar projeto...">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0" id="projectsTable">
+                                <thead class="bg-light text-secondary">
+                                    <tr>
+                                        <th class="ps-4">Projeto</th>
+                                        <th>Líder</th>
+                                        <th>Equipe</th>
+                                        <th>Prazo</th>
+                                        <th>Status</th>
+                                        <th>Progresso</th>
+                                        <th class="text-end pe-4">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Static Rows -->
+                                    <tr>
+                                        <td class="ps-4">
+                                            <div class="fw-bold text-dark">Website E-commerce</div>
+                                            <small class="text-muted">Fase: Frontend</small>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://i.pravatar.cc/150?img=68" class="rounded-circle me-2" width="28" height="28">
+                                                <span class="small">Carlos S.</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="avatar-group">
+                                                <img src="https://i.pravatar.cc/150?img=1" title="Ana" data-bs-toggle="tooltip">
+                                                <img src="https://i.pravatar.cc/150?img=2" title="Bob" data-bs-toggle="tooltip">
+                                                <img src="https://i.pravatar.cc/150?img=3" title="Cris" data-bs-toggle="tooltip">
+                                            </div>
+                                        </td>
+                                        <td class="small">15 Dez, 2023</td>
+                                        <td><span class="status-badge bg-status-active">Ativo</span></td>
+                                        <td style="width: 15%">
+                                            <div class="d-flex align-items-center">
+                                                <span class="small me-2">80%</span>
+                                                <div class="progress flex-grow-1" style="height: 4px;">
+                                                    <div class="progress-bar bg-success" style="width: 80%"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end pe-4">
+                                            <button class="btn btn-sm btn-light text-primary"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-light text-danger"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                    <!-- More rows... -->
+                                    <tr>
+                                        <td class="ps-4">
+                                            <div class="fw-bold text-dark">App Mobile Interno</div>
+                                            <small class="text-muted">Fase: Planejamento</small>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="https://i.pravatar.cc/150?img=44" class="rounded-circle me-2" width="28" height="28">
+                                                <span class="small">Maria J.</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="avatar-group">
+                                                <img src="https://i.pravatar.cc/150?img=5">
+                                                <img src="https://i.pravatar.cc/150?img=6">
+                                            </div>
+                                        </td>
+                                        <td class="small">20 Jan, 2024</td>
+                                        <td><span class="status-badge bg-status-planning">Planejamento</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="small me-2">45%</span>
+                                                <div class="progress flex-grow-1" style="height: 4px;">
+                                                    <div class="progress-bar bg-info" style="width: 45%"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-end pe-4">
+                                            <button class="btn btn-sm btn-light text-primary"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-sm btn-light text-danger"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer bg-white py-3 d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Mostrando 2 de 12 projetos</small>
+                            <nav>
+                                <ul class="pagination pagination-sm mb-0">
+                                    <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW: KANBAN -->
+            <div id="view-kanban" class="d-none fade-in">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                    <div class="mb-2 mb-md-0">
+                        <h3 class="text-gray-800 mb-0">Quadro de Tarefas</h3>
+                        <div class="d-flex align-items-center mt-1">
+                            <span class="text-muted small me-2">Projeto:</span>
+                            <select class="form-select form-select-sm d-inline-block w-auto border-0 bg-transparent fw-bold text-primary p-0" style="box-shadow: none;">
+                                <option>Website E-commerce</option>
+                                <option>App Mobile</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-outline-secondary me-2"><i class="fas fa-filter"></i> Filtros</button>
+                        <button class="btn btn-primary" onclick="addNewTaskCard()"><i class="fas fa-plus"></i> Nova Tarefa</button>
+                    </div>
+                </div>
+
+                <div class="row flex-nowrap overflow-auto pb-4 h-100">
+                    <!-- Column: To Do -->
+                    <div class="col-md-4 col-lg-3 col-xl-3" style="min-width: 280px;">
+                        <div class="d-flex justify-content-between align-items-center mb-3 px-1">
+                            <h6 class="text-uppercase text-secondary fw-bold mb-0">
+                                <i class="fas fa-circle text-secondary me-2 small"></i>A Fazer <span class="badge bg-secondary rounded-pill ms-1">3</span>
+                            </h6>
+                            <button class="btn btn-sm btn-link text-muted"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="kanban-col" id="col-todo" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDrop(event)">
+                            
+                            <!-- Card 1 -->
+                            <div class="kanban-card priority-medium" draggable="true" ondragstart="drag(event)" id="task1">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="badge bg-light text-secondary border">Design</span>
+                                    <div class="dropdown">
+                                        <i class="fas fa-ellipsis-h text-muted" style="cursor:pointer" data-bs-toggle="dropdown"></i>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">Editar</a></li>
+                                            <li><a class="dropdown-item text-danger" href="#">Excluir</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <h6 class="fw-bold mb-1">Criar wireframes da Home</h6>
+                                <p class="text-muted small mb-3 line-clamp-2">Definir layout principal, paleta de cores e tipografia.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <div class="avatar-group">
+                                        <img src="https://i.pravatar.cc/150?img=3" alt="">
+                                    </div>
+                                    <small class="text-muted bg-light px-2 py-1 rounded"><i class="far fa-clock me-1"></i> 2 dias</small>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="kanban-card priority-high" draggable="true" ondragstart="drag(event)" id="task2">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="badge bg-light text-secondary border">Backend</span>
+                                    <i class="fas fa-ellipsis-h text-muted"></i>
+                                </div>
+                                <h6 class="fw-bold mb-1">Configurar API Gateway</h6>
+                                <p class="text-muted small mb-3">Urgente para integração.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <div class="avatar-group">
+                                        <img src="https://i.pravatar.cc/150?img=12" alt="">
+                                        <img src="https://i.pravatar.cc/150?img=11" alt="">
+                                    </div>
+                                    <small class="text-danger fw-bold bg-danger-subtle px-2 py-1 rounded"><i class="fas fa-fire me-1"></i> Hoje</small>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Column: In Progress -->
+                    <div class="col-md-4 col-lg-3 col-xl-3" style="min-width: 280px;">
+                        <div class="d-flex justify-content-between align-items-center mb-3 px-1">
+                            <h6 class="text-uppercase text-primary fw-bold mb-0">
+                                <i class="fas fa-circle text-primary me-2 small"></i>Em Andamento <span class="badge bg-primary rounded-pill ms-1">2</span>
+                            </h6>
+                        </div>
+                        <div class="kanban-col" id="col-progress" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDrop(event)">
+                            
+                            <!-- Card 3 -->
+                            <div class="kanban-card priority-low" draggable="true" ondragstart="drag(event)" id="task3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="badge bg-light text-secondary border">Frontend</span>
+                                    <i class="fas fa-ellipsis-h text-muted"></i>
+                                </div>
+                                <h6 class="fw-bold mb-1">Implementar Navbar</h6>
+                                <p class="text-muted small mb-3">Responsiva com menu hambúrguer e animações.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <div class="avatar-group">
+                                        <img src="https://i.pravatar.cc/150?img=9" alt="">
+                                        <img src="https://i.pravatar.cc/150?img=10" alt="">
+                                    </div>
+                                    <small class="text-muted bg-light px-2 py-1 rounded">14 Dez</small>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Column: Review -->
+                    <div class="col-md-4 col-lg-3 col-xl-3" style="min-width: 280px;">
+                        <div class="d-flex justify-content-between align-items-center mb-3 px-1">
+                            <h6 class="text-uppercase text-warning fw-bold mb-0">
+                                <i class="fas fa-circle text-warning me-2 small"></i>Revisão <span class="badge bg-warning text-dark rounded-pill ms-1">1</span>
+                            </h6>
+                        </div>
+                        <div class="kanban-col" id="col-review" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDrop(event)">
+                             <div class="kanban-card priority-medium" draggable="true" ondragstart="drag(event)" id="task4">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span class="badge bg-light text-secondary border">Copy</span>
+                                    <i class="fas fa-ellipsis-h text-muted"></i>
+                                </div>
+                                <h6 class="fw-bold mb-1">Revisar textos Institucionais</h6>
+                                <p class="text-muted small mb-3">Verificar ortografia e tom de voz.</p>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <div class="avatar-group">
+                                        <img src="https://i.pravatar.cc/150?img=32" alt="">
+                                    </div>
+                                    <small class="text-muted bg-light px-2 py-1 rounded">Ontem</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column: Done -->
+                    <div class="col-md-4 col-lg-3 col-xl-3" style="min-width: 280px;">
+                        <div class="d-flex justify-content-between align-items-center mb-3 px-1">
+                            <h6 class="text-uppercase text-success fw-bold mb-0">
+                                <i class="fas fa-circle text-success me-2 small"></i>Concluído <span class="badge bg-success rounded-pill ms-1">4</span>
+                            </h6>
+                        </div>
+                        <div class="kanban-col" id="col-done" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="leaveDrop(event)">
+                            <div class="kanban-card priority-low" style="opacity: 0.6; background: #f8f9fa;">
+                                <h6 class="fw-bold text-decoration-line-through text-muted">Setup do Repositório</h6>
+                                <div class="d-flex justify-content-end mt-2">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Novo Projeto -->
+<div class="modal fade" id="newProjectModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold text-primary"><i class="fas fa-folder-plus me-2"></i>Criar Novo Projeto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="newProjectForm">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small text-uppercase text-muted">Nome do Projeto</label>
+                        <input type="text" class="form-control" id="projName" placeholder="Ex: Novo E-commerce">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small text-uppercase text-muted">Líder</label>
+                        <select class="form-select" id="projLeader">
+                            <option value="Carlos S.">Carlos Silva</option>
+                            <option value="Maria O.">Maria Oliveira</option>
+                            <option value="João P.">João Pereira</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold small text-uppercase text-muted">Status</label>
+                            <select class="form-select" id="projStatus">
+                                <option value="bg-status-active">Ativo</option>
+                                <option value="bg-status-planning">Planejamento</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold small text-uppercase text-muted">Prazo</label>
+                            <input type="date" class="form-control" id="projDate">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveNewProject()">Salvar Projeto</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS & Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // --- UI Interactions ---
+
+    // Sidebar Toggle
+    document.getElementById('sidebarToggle').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.classList.toggle('sb-sidenav-toggled');
+    });
+
+    // Navigation / View Switcher
+    function showView(viewName) {
+        // Update Navbar Title
+        const titles = {
+            'dashboard': 'Visão Geral',
+            'projects': 'Lista de Projetos',
+            'kanban': 'Quadro Kanban'
+        };
+        document.getElementById('page-title').textContent = titles[viewName];
+
+        // Hide all views
+        ['dashboard', 'projects', 'kanban'].forEach(v => {
+            const el = document.getElementById('view-' + v);
+            el.classList.add('d-none');
+            el.classList.remove('fade-in'); // Reset animation
+        });
+
+        // Sidebar Active State
+        document.querySelectorAll('.list-group-item').forEach(el => el.classList.remove('active'));
+        document.getElementById('nav-' + viewName).classList.add('active');
+
+        // Show Selected View
+        const selected = document.getElementById('view-' + viewName);
+        selected.classList.remove('d-none');
+        // Trigger Reflow for animation
+        void selected.offsetWidth; 
+        selected.classList.add('fade-in');
+    }
+
+    // --- Mock Data Logic ---
+
+    // 1. Add New Project to Table
+    function saveNewProject() {
+        const name = document.getElementById('projName').value || "Novo Projeto";
+        const leader = document.getElementById('projLeader').value;
+        const date = document.getElementById('projDate').value || "31 Dez, 2023";
+        const statusClass = document.getElementById('projStatus').value;
+        const statusLabel = statusClass === 'bg-status-active' ? 'Ativo' : 'Planejamento';
+
+        // Create Table Row HTML
+        const newRow = `
+            <tr>
+                <td class="ps-4">
+                    <div class="fw-bold text-dark">${name}</div>
+                    <small class="text-muted">Novo</small>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-2" style="width:28px; height:28px; font-size:10px;">${leader.charAt(0)}</div>
+                        <span class="small">${leader}</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="avatar-group">
+                        <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center" style="width:32px; height:32px; border:2px solid white;">?</div>
+                    </div>
+                </td>
+                <td class="small">${date}</td>
+                <td><span class="status-badge ${statusClass}">${statusLabel}</span></td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <span class="small me-2">0%</span>
+                        <div class="progress flex-grow-1" style="height: 4px;">
+                            <div class="progress-bar bg-secondary" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-end pe-4">
+                    <button class="btn btn-sm btn-light text-primary"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-sm btn-light text-danger"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        `;
+
+        // Append and Close
+        const tbody = document.querySelector('#projectsTable tbody');
+        tbody.insertAdjacentHTML('afterbegin', newRow);
+        
+        // Update Stats Counter
+        const countEl = document.getElementById('dash-total-projects');
+        countEl.textContent = parseInt(countEl.textContent) + 1;
+
+        // Close Modal
+        const modalEl = document.getElementById('newProjectModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        modal.hide();
+
+        // Clear form
+        document.getElementById('newProjectForm').reset();
+    }
+
+    // 2. Add New Task to Kanban
+    function addNewTaskCard() {
+        const col = document.getElementById('col-todo');
+        const newCardId = 'task-' + Date.now();
+        
+        const cardHTML = `
+            <div class="kanban-card priority-medium fade-in" draggable="true" ondragstart="drag(event)" id="${newCardId}">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="badge bg-light text-secondary border">Geral</span>
+                    <i class="fas fa-ellipsis-h text-muted"></i>
+                </div>
+                <h6 class="fw-bold mb-1">Nova Tarefa</h6>
+                <p class="text-muted small mb-3">Clique para editar detalhes.</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div class="avatar-group">
+                        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center" style="width:32px; height:32px; border:2px solid white;">?</div>
+                    </div>
+                    <small class="text-muted bg-light px-2 py-1 rounded">--</small>
+                </div>
+            </div>
+        `;
+        
+        // Insert after header
+        col.insertAdjacentHTML('afterbegin', cardHTML);
+    }
+
+
+    // --- Kanban Drag & Drop Logic (Improved) ---
+    
+    function allowDrop(ev) {
+        ev.preventDefault();
+        // Visual feedback
+        const col = ev.target.closest('.kanban-col');
+        if (col) {
+            col.classList.add('drag-over');
+        }
+    }
+
+    function leaveDrop(ev) {
+        const col = ev.target.closest('.kanban-col');
+        if (col) {
+            col.classList.remove('drag-over');
+        }
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+        ev.target.classList.add('dragging');
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        var draggedElement = document.getElementById(data);
+        
+        if (draggedElement) {
+            draggedElement.classList.remove('dragging');
+            
+            // Robust drop targeting: Always find the column container
+            const dropColumn = ev.target.closest('.kanban-col');
+            
+            if (dropColumn) {
+                dropColumn.classList.remove('drag-over');
+                dropColumn.appendChild(draggedElement);
+                // Optional: Trigger backend update here
+            }
+        }
+    }
+
+
+    // --- Charts Initialization ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('statusChart').getContext('2d');
+        
+        // Custom Chart Defaults
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#858796';
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Concluído', 'Em Andamento', 'Planejamento'],
+                datasets: [{
+                    data: [35, 45, 20],
+                    backgroundColor: ['#1cc88a', '#4e73df', '#f6c23e'],
+                    hoverBackgroundColor: ['#17a673', '#2e59d9', '#dda20a'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                    borderWidth: 4
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: "rgb(255,255,255)",
+                        bodyColor: "#858796",
+                        borderColor: '#dddfeb',
+                        borderWidth: 1,
+                        xPadding: 15,
+                        yPadding: 15,
+                        displayColors: false,
+                        caretPadding: 10,
+                    }
+                },
+                cutout: '75%',
+            }
+        });
+    });
+
+</script>
+
+</body>
+</html>
