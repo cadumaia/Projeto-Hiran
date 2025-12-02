@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Projetos - Dashboard</title>
-    <link href="index.css" rel="stylesheet">
+    <title>Gerenciador de Projetos - Projetos</title>
+    <link href="styles/projetos.css" rel="stylesheet">
+    <link rel="shortcut icon" href="mídias/logogearbranca.svg">
+
 </head>
 <body>
 
     <nav class="sidebar">
         <div class="logo">
-           <img src = "mídias/logogearbranca.svg" alt = "logo do site" class = "logosite">
+            <img src="mídias/logogearbranca.svg" alt="Logo do site" class="logosite">
         </div>
+
         <div class="menu">
             <a href="index.html">Dashboard</a>
             <a href="projetos.html" class="active">Projetos</a>
@@ -20,8 +23,11 @@
             <a href="relatorios.html">Relatórios</a>
             <a href="configuracoes.html">Configurações</a>
         </div>
-        <div class="user-profile">
+
+        <div class="perfil">
+            <a href="login.html" class="avatar-link">
             <div class="avatar">CM</div>
+            </a>
             <div>
                 <p>Cadu Maia</p>
                 <small style="color: var(--text-light)">Admin</small>
@@ -30,12 +36,112 @@
     </nav>
 
     <main class="conteudo">
-        
-        <header>
-            <div>
-                <h1>Visão Geral</h1>
-            </div>
+
+        <header class="topo">
+            <h1>Projetos</h1>
+            <button class="botaonovo" id="btn-open-form">+ Novo Projeto</button>
         </header>
 
+        <section class="projetos">
+            <div class="headerprojetos">
+                <h2>Lista de Projetos</h2>
+
+                <div class="barrapesquisa">
+                    <input type="text" placeholder="Buscar projetos...">
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cliente</th>
+                        <th>Início</th>
+                        <th>Prazo</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+    <tr>
+        <td>
+            <a href="descricaoprojeto.html" class="link-projeto">
+                <strong>Sistema de Reservas</strong>
+            </a>
+        </td>
+        <td>Hotel Teste</td>
+        <td>10 Out 2025</td>
+        <td>10 Dez 2025</td>
+        <td><span class="andamento">Em andamento</span></td>
+    </tr>
+
+    <tr>
+        <td>
+            <a href="descricaoprojeto.html" class="link-projeto">
+                <strong>Website Teste</strong>
+            </a>
+        </td>
+        <td>ImóvelTeste</td>
+        <td>01 Set 2025</td>
+        <td>20 Out 2025</td>
+        <td><span class="pendente">Pendente</span></td>
+    </tr>
+
+    <tr>
+        <td>
+            <a href="descricaoprojeto.html" class="link-projeto">
+                <strong>ERP Teste</strong>
+            </a>
+        </td>
+        <td>Comercial Teste</td>
+        <td>15 Ago 2025</td>
+        <td>30 Nov 2025</td>
+        <td><span class="atrasado">Atrasado</span></td>
+    </tr>
+</tbody>
+
+            </table>
+        </section>
+
+        <!-- novo projeto -->
+        <section class="containerform">
+            <h2>Cadastrar Novo Projeto</h2>
+
+            <form>
+                <div class="grupoform">
+                    <label for="nome">Nome do Projeto</label>
+                    <input type="text" id="nome" name="nome" required minlength="3" placeholder="Ex: Sistema de Vendas">
+                </div>
+
+                <div class="grupoform">
+                    <label for="cliente">Cliente</label>
+                    <input type="text" id="cliente" name="cliente" required placeholder="Nome do cliente">
+                </div>
+
+                <div class="grupoform">
+                    <label for="inicio">Data de Início</label>
+                    <input type="date" id="inicio" name="inicio" required>
+                </div>
+
+                <div class="grupoform">
+                    <label for="prazo">Prazo Final</label>
+                    <input type="date" id="prazo" name="prazo" required>
+                </div>
+
+                <div class="grupoform">
+                    <label for="status">Status</label>
+                    <select id="status" name="status" required>
+                        <option value="">Selecione...</option>
+                        <option value="em_andamento">Em andamento</option>
+                        <option value="pendente">Pendente</option>
+                        <option value="atrasado">Atrasado</option>
+                        <option value="concluido">Concluído</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="botaosubmit">Salvar Projeto</button>
+            </form>
+        </section>
+    </main>
 </body>
 </html>

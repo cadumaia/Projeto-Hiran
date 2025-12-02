@@ -1,0 +1,111 @@
+@import url('index.css');
+/* importar estilo base */
+@import url('index.css');
+
+/* cartão de configuração */
+.config-card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.config-card h2 {
+    margin-bottom: 20px;
+}
+
+/* cada linha interna */
+.linha {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.linha label {
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+/* inputs */
+.linha input {
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f8f8f8;
+}
+
+/* tema */
+.tema-opcoes {
+    display: flex;
+    gap: 20px;
+}
+
+.tema {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* botão alterar */
+.botaoseg {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* switch */
+.switch {
+    position: relative;
+    width: 46px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background: #ccc;
+    border-radius: 30px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: .3s;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+.switch input:checked + .slider {
+    background: var(--primary-color);
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(22px);
+}
+
+/* responsivo */
+@media (max-width: 768px) {
+    .linha {
+        flex-direction: column;
+    }
+}

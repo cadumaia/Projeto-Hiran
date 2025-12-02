@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Projetos - Dashboard</title>
-    <link href="index.css" rel="stylesheet">
+    <title>Gerenciador do Projeto - Tarefas</title>
+    <link href="styles/tarefas.css" rel="stylesheet">
+    <link rel="shortcut icon" href="mídias/logogearbranca.svg">
 </head>
+
 <body>
 
     <nav class="sidebar">
         <div class="logo">
-           <img src = "mídias/logogearbranca.svg" alt = "logo do site" class = "logosite">
+            <img src="mídias/logogearbranca.svg" alt="logo do site" class="logosite">
         </div>
+
         <div class="menu">
             <a href="index.html">Dashboard</a>
             <a href="projetos.html">Projetos</a>
@@ -20,8 +23,11 @@
             <a href="relatorios.html">Relatórios</a>
             <a href="configuracoes.html">Configurações</a>
         </div>
-        <div class="user-profile">
+
+        <div class="perfil">
+            <a href="login.html" class="avatar-link">
             <div class="avatar">CM</div>
+            </a>
             <div>
                 <p>Cadu Maia</p>
                 <small style="color: var(--text-light)">Admin</small>
@@ -30,12 +36,112 @@
     </nav>
 
     <main class="conteudo">
-        
+
+        <!-- header -->
         <header>
             <div>
-                <h1>Visão Geral</h1>
+                <h1>Gerenciamento de Tarefas</h1>
             </div>
+
+            <div class="barrapesquisa">
+                <input type="text" placeholder="Buscar tarefas...">
+            </div>
+
+            <button class="botaonovo">+ Nova Tarefa</button>
         </header>
 
+        <!-- resumo -->
+        <section class="colunastatus">
+            <div class="card blue">
+                <h3>Total de Tarefas</h3>
+                <div class="numero">42</div>
+            </div>
+
+            <div class="card green">
+                <h3>Concluídas</h3>
+                <div class="numero">18</div>
+            </div>
+
+            <div class="card orange">
+                <h3>Em Progresso</h3>
+                <div class="numero">12</div>
+            </div>
+
+            <div class="card">
+                <h3>Pendentes</h3>
+                <div class="numero">12</div>
+            </div>
+        </section>
+
+        <!-- tarefas -->
+        <section class="projetos">
+            <div class="headerprojetos">
+                <h2>Tarefas Recentes</h2>
+                <a href="#" style="color: var(--primary-color); text-decoration: none;">Ver tudo</a>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tarefa</th>
+                        <th>Projeto</th>
+                        <th>Responsável</th>
+                        <th>Prazo</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="descricaotarefa.html" class="link-projeto">
+                            <strong>Wireframe da Home</strong>
+                            </a>
+                        </td>
+                        <td>Redesign E-commerce</td>
+                        <td>Cadu Maia</td>
+                        <td>12 Out 2025</td>
+                        <td><span class="status active">Em Dia</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <a href="descricaotarefa.html" class="link-projeto">
+                            <strong>Criação da API</strong>
+                            </a>
+                        </td>
+                        <td>Sistema de RH</td>
+                        <td>Maria Isabelly</td>
+                        <td>20 Out 2025</td>
+                        <td><span class="status pending">Pendente</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <a href="descricaotarefa.html" class="link-projeto">
+                            <strong>Testes Funcionais</strong>
+                            </a>
+                        </td>
+                        <td>App Financeiro</td>
+                        <td>Enzo Soares</td>
+                        <td>05 Nov 2025</td>
+                        <td><span class="status delayed">Atrasado</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <a href="descricaotarefa.html" class="link-projeto">
+                            <strong>Design do Dashboard</strong>
+                            </a>
+                        </td>
+                        <td>ERP Comercial</td>
+                        <td>Caroline Saraiva</td>
+                        <td>18 Out 2025</td>
+                        <td><span class="status active">Em Dia</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
 </body>
 </html>

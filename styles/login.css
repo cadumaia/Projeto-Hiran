@@ -1,0 +1,51 @@
+@import url('index.css');
+
+/* fundo */
+.login-bg {
+    background: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* container */
+.login-container {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 16px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.login-logo {
+    width: 60px;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.link {
+    margin-top: 20px;
+}

@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Projetos - Dashboard</title>
-    <link href="index.css" rel="stylesheet">
+    <title>Configurações</title>
+    <link href="/styles/configuracoes.css" rel="stylesheet">
+    <link rel="shortcut icon" href="mídias/logogearbranca.svg">
 </head>
+
 <body>
 
     <nav class="sidebar">
         <div class="logo">
-           <img src = "mídias/logogearbranca.svg" alt = "logo do site" class = "logosite">
+            <img src="mídias/logogearbranca.svg" alt="Logo do site" class="logosite">
         </div>
+
         <div class="menu">
             <a href="index.html">Dashboard</a>
             <a href="projetos.html">Projetos</a>
             <a href="tarefas.html">Tarefas</a>
             <a href="equipe.html">Equipe</a>
-            <a href="relatorios.html" class="active">Relatórios</a>
+            <a href="relatorios.html">Relatórios</a>
             <a href="configuracoes.html" class="active">Configurações</a>
         </div>
-        <div class="user-profile">
+
+        <div class="perfil">
+            <a href="login.html" class="avatar-link">
             <div class="avatar">CM</div>
+            </a>
             <div>
                 <p>Cadu Maia</p>
                 <small style="color: var(--text-light)">Admin</small>
@@ -30,12 +37,81 @@
     </nav>
 
     <main class="conteudo">
-        
+
+        <!-- header -->
         <header>
-            <div>
-                <h1>Visão Geral</h1>
-            </div>
+            <h1>Configurações</h1>
+            <div></div>
         </header>
 
+        <!-- seções de configurações -->
+        <section class="config-card">
+            <h2>Perfil</h2>
+
+            <div class="linha">
+                <label>Nome</label>
+                <input type="text" placeholder="Cadu Maia" disabled>
+            </div>
+
+            <div class="linha">
+                <label>E-mail</label>
+                <input type="email" placeholder="teste@emailteste.com" disabled>
+            </div>
+
+            <div class="linha">
+                <label>Cargo</label>
+                <input type="text" placeholder="Administrador" disabled>
+            </div>
+        </section>
+
+        <section class="config-card">
+            <h2>Preferências</h2>
+
+            <div class="linha">
+                <label>Tema do Sistema</label>
+
+                <div class="tema-opcoes">
+                    <label class="tema">
+                        <input type="radio" name="tema" checked>
+                        <span>Claro</span>
+                    </label>
+
+                    <label class="tema">
+                        <input type="radio" name="tema">
+                        <span>Escuro</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="linha">
+                <label>Notificações</label>
+
+                <div class="switch">
+                    <input type="checkbox" id="notif">
+                    <label for="notif" class="slider"></label>
+                </div>
+            </div>
+        </section>
+
+        <section class="config-card">
+            <h2>Segurança</h2>
+
+            <div class="linha">
+                <label>Alterar senha</label>
+                <a href="#" class="botaoseg">Alterar</a>
+            </div>
+
+            <div class="linha">
+                <label>Autenticação de 2 Fatores</label>
+                <div class="switch">
+                    <input type="checkbox" id="2fa">
+                    <label for="2fa" class="slider"></label>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
 </body>
+
 </html>

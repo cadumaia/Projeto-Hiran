@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Projetos - Dashboard</title>
-    <link href="index.css" rel="stylesheet">
+    <title>Gerenciador do Projeto - Relatórios</title>
+    <link href="styles/relatorios.css" rel="stylesheet">
+    <link rel="shortcut icon" href="mídias/logogearbranca.svg">
 </head>
+
 <body>
 
     <nav class="sidebar">
         <div class="logo">
-           <img src = "mídias/logogearbranca.svg" alt = "logo do site" class = "logosite">
+            <img src="mídias/logogearbranca.svg" alt="logo do site" class="logosite">
         </div>
+
         <div class="menu">
             <a href="index.html">Dashboard</a>
             <a href="projetos.html">Projetos</a>
@@ -20,8 +23,11 @@
             <a href="relatorios.html" class="active">Relatórios</a>
             <a href="configuracoes.html">Configurações</a>
         </div>
-        <div class="user-profile">
+
+        <div class="perfil">
+            <a href="login.html" class="avatar-link">
             <div class="avatar">CM</div>
+            </a>
             <div>
                 <p>Cadu Maia</p>
                 <small style="color: var(--text-light)">Admin</small>
@@ -30,12 +36,89 @@
     </nav>
 
     <main class="conteudo">
-        
+
+        <!-- header -->
         <header>
             <div>
-                <h1>Visão Geral</h1>
+                <h1>Relatórios Gerais</h1>
             </div>
+
+            <div class="barrapesquisa">
+                <input type="text" placeholder="Buscar relatórios...">
+            </div>
+
+            <button class="botaonovo">+ Gerar Relatório</button>
         </header>
 
+        <!-- cards resumo -->
+        <section class="colunastatus">
+            <div class="card blue">
+                <h3>Total de Relatórios</h3>
+                <div class="numero">15</div>
+            </div>
+
+            <div class="card green">
+                <h3>Este Mês</h3>
+                <div class="numero">6</div>
+            </div>
+
+            <div class="card orange">
+                <h3>Últimos 7 dias</h3>
+                <div class="numero">3</div>
+            </div>
+
+            <div class="card">
+                <h3>Relatórios Pendentes</h3>
+                <div class="numero">6</div>
+            </div>
+        </section>
+
+        <!-- tabela relatório -->
+        <section class="projetos">
+
+            <div class="headerprojetos">
+                <h2>Histórico de Relatórios</h2>
+                <a href="#" style="color: var(--primary-color); text-decoration: none;">Ver tudo</a>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Tipo</th>
+                        <th>Responsável</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><strong>Relatório de Desempenho</strong></td>
+                        <td>Mensal</td>
+                        <td>Cadu Maia</td>
+                        <td>05 Out 2025</td>
+                        <td><span class="status active">Concluído</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Produtividade da Equipe</strong></td>
+                        <td>Semanal</td>
+                        <td>Enzo Soares</td>
+                        <td>02 Out 2025</td>
+                        <td><span class="status pending">Em Revisão</span></td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Horas Trabalhadas</strong></td>
+                        <td>Mensal</td>
+                        <td>Caroline Saraiva</td>
+                        <td>30 Set 2025</td>
+                        <td><span class="status delayed">Atrasado</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
 </body>
 </html>

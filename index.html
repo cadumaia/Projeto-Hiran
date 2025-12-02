@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Projetos - Dashboard</title>
-    <link href="index.css" rel="stylesheet">
+    <title>Gerenciador do Projeto</title>
+    <link href="styles/index.css" rel="stylesheet">
+    <link rel="shortcut icon" href="mídias/logogearbranca.svg">
 </head>
 <body>
 
@@ -20,8 +21,10 @@
             <a href="relatorios.html">Relatórios</a>
             <a href="configuracoes.html">Configurações</a>
         </div>
-        <div class="user-profile">
+        <div class="perfil">
+            <a href="login.html" class="avatar-link">
             <div class="avatar">CM</div>
+            </a>
             <div>
                 <p>Cadu Maia</p>
                 <small style="color: var(--text-light)">Admin</small>
@@ -35,33 +38,33 @@
             <div>
                 <h1>Visão Geral</h1>
             </div>
-            <div class="search-bar">
+            <div class="barrapesquisa">
                 <input type="text" placeholder="Buscar projetos...">
             </div>
-            <button class="btn-new">+ Novo Projeto</button>
+            <button class="botaonovo">+ Novo Projeto</button>
         </header>
 
-        <section class="stats-grid">
+        <section class="colunastatus">
             <div class="card blue">
                 <h3>Total de Projetos</h3>
-                <div class="number">12</div>
+                <div class="numero">12</div>
             </div>
             <div class="card green">
                 <h3>Concluídos</h3>
-                <div class="number">24</div>
+                <div class="numero">7</div>
             </div>
             <div class="card orange">
                 <h3>Em Andamento</h3>
-                <div class="number">5</div>
+                <div class="numero">5</div>
             </div>
             <div class="card">
                 <h3>Horas Totais</h3>
-                <div class="number">128h</div>
+                <div class="numero">128h</div>
             </div>
         </section>
 
-        <section class="projects-section">
-            <div class="section-header">
+        <section class="projetos">
+            <div class="headerprojetos">
                 <h2>Projetos Recentes</h2>
                 <a href="#" style="color: var(--primary-color); text-decoration: none;">Ver tudo</a>
             </div>
@@ -79,28 +82,28 @@
                 <tbody>
                     <tr>
                         <td><strong>Redesign E-commerce</strong></td>
-                        <td>Loja Varejo S.A.</td>
+                        <td>Loja Teste.</td>
                         <td>25 Out 2025</td>
                         <td><span class="status active">Em Dia</span></td>
                         <td>75%</td>
                     </tr>
                     <tr>
                         <td><strong>App Mobile Financeiro</strong></td>
-                        <td>Banco X</td>
+                        <td>Banco Teste</td>
                         <td>10 Nov 2025</td>
                         <td><span class="status pending">Pendente</span></td>
                         <td>30%</td>
                     </tr>
                     <tr>
                         <td><strong>Landing Page Institucional</strong></td>
-                        <td>Advocacia Silva</td>
+                        <td>Advocacia Teste</td>
                         <td>15 Out 2025</td>
                         <td><span class="status delayed">Atrasado</span></td>
                         <td>90%</td>
                     </tr>
                     <tr>
                         <td><strong>Sistema de RH</strong></td>
-                        <td>Tech Solutions</td>
+                        <td>Teste Solutions</td>
                         <td>01 Dez 2025</td>
                         <td><span class="status active">Em Dia</span></td>
                         <td>10%</td>
@@ -108,7 +111,6 @@
                 </tbody>
             </table>
         </section>
-
     </main>
 </body>
 </html>

@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Projetos - Dashboard</title>
-    <link href="index.css" rel="stylesheet">
+    <title>Gerenciador do Projeto - Equipe</title>
+    <link href="styles/equipe.css" rel="stylesheet">
+    <link rel="shortcut icon" href="mídias/logogearbranca.svg">
 </head>
+
 <body>
 
     <nav class="sidebar">
         <div class="logo">
-           <img src = "mídias/logogearbranca.svg" alt = "logo do site" class = "logosite">
+            <img src="mídias/logogearbranca.svg" alt="logo do site" class="logosite">
         </div>
+
         <div class="menu">
             <a href="index.html">Dashboard</a>
             <a href="projetos.html">Projetos</a>
             <a href="tarefas.html">Tarefas</a>
             <a href="equipe.html" class="active">Equipe</a>
-            <a href="relatorios.html" class="active">Relatórios</a>
+            <a href="relatorios.html">Relatórios</a>
             <a href="configuracoes.html">Configurações</a>
         </div>
-        <div class="user-profile">
+
+        <div class="perfil">
+            <a href="login.html" class="avatar-link">
             <div class="avatar">CM</div>
+            </a>
             <div>
                 <p>Cadu Maia</p>
                 <small style="color: var(--text-light)">Admin</small>
@@ -30,12 +36,51 @@
     </nav>
 
     <main class="conteudo">
-        
+
+        <!-- header -->
         <header>
             <div>
-                <h1>Visão Geral</h1>
+                <h1>Equipe de Trabalho</h1>
             </div>
+
+            <div class="barrapesquisa">
+                <input type="text" placeholder="Buscar membros...">
+            </div>
+
+            <button class="botaonovo">+ Novo Membro</button>
         </header>
 
+        <!-- cards da equipe -->
+        <section class="colaboradores">
+
+            <div class="card-membro">
+                <div class="avatar-m">CM</div>
+                <h3>Cadu Maia</h3>
+                <p>Analista</p>
+                <span class="status active">Online</span>
+            </div>
+
+            <div class="card-membro">
+                <div class="avatar-m">ES</div>
+                <h3>Enzo Soares</h3>
+                <p>Desenvolvedor Backend</p>
+                <span class="status active">Online</span>
+            </div>
+
+            <div class="card-membro">
+                <div class="avatar-m">CS</div>
+                <h3>Caroline Saraiva</h3>
+                <p>QA / Testes</p>
+                <span class="status pending">Férias</span>
+            </div>
+
+            <div class="card-membro">
+                <div class="avatar-m">MI</div>
+                <h3>Maria Isabelly</h3>
+                <p>Front-End</p>
+                <span class="status delayed">Offline</span>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
